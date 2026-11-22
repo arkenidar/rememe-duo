@@ -8,8 +8,8 @@ require_once __DIR__ . '/config.php';
 function rooms_dir(): string
 {
     $dir = config('rooms_dir');
-    if (!is_dir($dir)) {
-        mkdir($dir, 0777, true);
+    if (!is_dir($dir) && !@mkdir($dir, 0775, true)) {
+        throw new RuntimeException('cannot create rooms directory: ' . $dir);
     }
     return $dir;
 }
@@ -38,7 +38,10 @@ function room_save(array $room): void
 {
     $path = room_path($room['id']);
     $tmp  = $path . '.tmp';
-    $fh   = fopen($tmp, 'c');
+    $fh   = @fopen($tmp, 'c');
+    if ($fh === false) {
+        throw new RuntimeException('cannot write room file: ' . $tmp . ' — check that the web server user can write to the rooms directory');
+    }
     flock($fh, LOCK_EX);
     ftruncate($fh, 0);
     fwrite($fh, json_encode($room, JSON_UNESCAPED_UNICODE));

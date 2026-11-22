@@ -235,6 +235,7 @@ function add_person(array &$room, string $token, string $name): void
 $action = param('action') ?? '';
 $token  = param('token') ?? '';
 
+try {
 switch ($action) {
     case 'hello': {
         respond(['ok' => true, 'token' => bin2hex(random_bytes(6))]);
@@ -321,5 +322,8 @@ switch ($action) {
 
     default:
         respond_error('unknown action: ' . $action, 404);
+}
+} catch (Throwable $e) {
+    respond_error('server error: ' . $e->getMessage(), 500);
 }
 
