@@ -1,0 +1,22 @@
+# --- Runtime data (auto-created at runtime) ---
+# One JSON file per lobby/game room. Never commit live games.
+/rooms/*
+!/rooms/.gitkeep
+
+# --- Dependencies ---
+/vendor/
+
+# --- Environment & secrets ---
+.env
+.env.*
+
+# --- Logs ---
+*.log
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Editors / IDEs ---
+.idea/
+.vscode/

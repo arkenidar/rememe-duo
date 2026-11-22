@@ -1,0 +1,139 @@
+/* style.css — a soft light theme. The layout, not the logic. */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #eef0f4;
+  color: #33383f;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.wrap { width: min(760px, 100%); padding: 24px 16px 80px; }
+
+h1 { font-size: 20px; margin: 0 0 12px; color: #2b3037; }
+p { margin: 6px 0; }
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #e3e7ed;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(30, 40, 60, 0.06);
+}
+.center { text-align: center; padding: 40px 20px; }
+
+.row { display: flex; gap: 8px; align-items: center; }
+.between { justify-content: space-between; }
+.actions { margin: 14px 0; }
+
+input {
+  background: #ffffff;
+  border: 1px solid #d3d9e2;
+  color: #2f343b;
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 15px;
+  min-width: 0;
+  flex: 1;
+}
+input::placeholder { color: #9aa3b0; }
+input:focus { outline: 2px solid #a9c6f0; border-color: #4a7fd6; }
+
+button {
+  background: #4a7fd6;
+  color: #ffffff;
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+button:hover { background: #3d6fc2; }
+button:disabled { cursor: not-allowed; opacity: .55; }
+
+.muted { color: #78808c; }
+.label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: #78808c;
+  margin: 16px 0 6px;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  background: #e9edf3;
+  color: #3a414a;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+.chip.game { border: 1px solid #4a7fd6; background: #ffffff; }
+.chip.game:hover { background: #eaf1fb; }
+
+/* the shared table-board */
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+.card {
+  aspect-ratio: 1 / 1;
+  font-size: 28px;
+  background: #e6eaf1;
+  border: 1px solid #d3d9e3;
+  color: #aab3c2;               /* the hidden "◆" back */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(30, 40, 60, 0.05);
+}
+.card.up { background: #d5e4fb; color: #2b3037; border-color: #bcd2f2; }
+.card.matched { background: #cfe9db; color: #2b3037; border-color: #b4d9c3; }
+/* the board is shared, so a "disabled" card (opponent's turn) must still look normal */
+.card:disabled { cursor: default; opacity: 1; }
+
+.scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 16px;
+  margin: 10px 0;
+}
+.scoreboard .vs { color: #9aa3b0; }
+.player { display: flex; gap: 8px; padding: 6px 14px; border-radius: 8px; color: #33383f; }
+.player.active { background: #4a7fd6; color: #ffffff; }
+.player.win { background: #2f9e6e; color: #ffffff; }
+
+.waiting { text-align: center; padding: 20px 0; }
+.code {
+  font-size: 30px;
+  letter-spacing: .15em;
+  font-weight: 700;
+  color: #2f6bd0;
+  margin: 8px 0;
+}
+
+/* chat (identical in lobby and game rooms) */
+.chat { margin-top: 18px; border-top: 1px solid #e3e7ed; padding-top: 14px; }
+.messages {
+  height: 180px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.msg { background: #eef1f6; border-radius: 8px; padding: 6px 10px; font-size: 14px; color: #3a414a; }
+.msg b { color: #2f6bd0; margin-right: 6px; }
+
+[x-cloak] { display: none !important; }
